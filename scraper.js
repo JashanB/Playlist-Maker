@@ -18,12 +18,12 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 //Get user id to access playlists
-app.post('/spotify', async (req, res) => {
-    const { username, password } = req.body;
+app.get('/spotify', async (req, res) => {
+    const { username, password } = req.query;
     console.log({username, password})
     const token_url = 'https://accounts.spotify.com/api/token';
     const auth_token = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-    console.log('autho', auth_token)
+  
     try {
       const response = await axios.post(token_url, 'grant_type=client_credentials', {
         headers: {
