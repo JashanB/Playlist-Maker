@@ -12,6 +12,8 @@ const clientSecret = process.env.CLIENTSECRET;
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const fetch = require('node-fetch');
+
 
 
 app.use(express.static('public'));
@@ -43,7 +45,7 @@ app.post('/spotify', async (req, res) => {
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            console.log('*******token response', jsonResponse);
+            console.log('*******token response', jsonResponse.access_token);
         } else {
             console.log(response.statusText);
             throw new Error(`Request failed! Status code: ${response.status} ${response.statusText}`);
@@ -52,6 +54,7 @@ app.post('/spotify', async (req, res) => {
     
     getSpotifyToken()
     //   const access_token = response.data.access_token;
+    //   const access_token = getSpotifyToken()
     //   const user_url = 'https://api.spotify.com/v1/me';
     //   const user_response = await axios.get(user_url, {
     //     headers: {
