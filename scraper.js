@@ -56,9 +56,16 @@ app.post('/spotify', async (req, res) => {
     //   const access_token = response.data.access_token;
       const access_token = getSpotifyToken()
       const user_url = 'https://api.spotify.com/v1/me';
-      const user_response = await axios.get(user_url, {
+    //   const user_response = await axios.get(user_url, {
+    //     headers: {
+    //       'Authorization': `Bearer ${access_token}`
+    //     }
+    //   });
+    const user_response = await axios.get(user_url, {
         headers: {
-          'Authorization': `Bearer ${access_token}`
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + access_token,
+          'Content-Type': 'application/json',
         }
       });
       console.log('******response', user_response)
@@ -73,4 +80,4 @@ app.post('/spotify', async (req, res) => {
   
   app.listen(8000, () => {
     console.log('Server started on port 8000');
-  });
+  });ø

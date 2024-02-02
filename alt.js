@@ -61,19 +61,21 @@ axios.post('/spotify', async (req, res) => {
       const user_url = 'https://api.spotify.com/v1/me';
       const user_response = await axios.get(user_url, {
         headers: {
-          'Authorization': `Bearer ${access_token}`
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + access_token,
+          'Content-Type': 'application/json',
         }
       });
       console.log('******response', user_response)
       const user_id = user_response.data.id;
       console.log(`User ID: ${user_id}`);
-      res.send(`User ID: ${user_id}`);
+    //   res.send(`User ID: ${user_id}`);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error');
+    //   res.status(500).send('Error');
     }
   });
   
-  app.listen(8000, () => {
-    console.log('Server started on port 8000');
-  });
+//   app.listen(8000, () => {
+//     console.log('Server started on port 8000');
+//   });
