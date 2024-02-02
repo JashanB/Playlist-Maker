@@ -45,26 +45,26 @@ app.post('/spotify', async (req, res) => {
         });
         if (response.ok) {
             const jsonResponse = await response.json();
-            console.log('*******token response', jsonResponse.access_token);
+           return jsonResponse.access_token;
         } else {
             console.log(response.statusText);
             throw new Error(`Request failed! Status code: ${response.status} ${response.statusText}`);
         }
     }
     
-    getSpotifyToken()
+    // getSpotifyToken()
     //   const access_token = response.data.access_token;
-    //   const access_token = getSpotifyToken()
-    //   const user_url = 'https://api.spotify.com/v1/me';
-    //   const user_response = await axios.get(user_url, {
-    //     headers: {
-    //       'Authorization': `Bearer ${access_token}`
-    //     }
-    //   });
-    //   console.log('******response', user_response)
-    //   const user_id = user_response.data.id;
-    //   console.log(`User ID: ${user_id}`);
-    //   res.send(`User ID: ${user_id}`);
+      const access_token = getSpotifyToken()
+      const user_url = 'https://api.spotify.com/v1/me';
+      const user_response = await axios.get(user_url, {
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        }
+      });
+      console.log('******response', user_response)
+      const user_id = user_response.data.id;
+      console.log(`User ID: ${user_id}`);
+      res.send(`User ID: ${user_id}`);
     } catch (error) {
       console.error(error);
       res.status(500).send('Error');
